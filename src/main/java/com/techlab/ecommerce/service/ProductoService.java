@@ -22,4 +22,17 @@ public class ProductoService {
         }
         return productoRepository.save(producto);
     }
+
+    //metodo para el carrito
+    public Producto obtenerPorId(Long id) {
+        return productoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + id));
+    }
+
+    public void eliminarProducto(Long id) {
+        if (!productoRepository.existsById(id)) {
+            throw new RuntimeException("No se encontró el producto con ID: " + id);
+        }
+        productoRepository.deleteById(id);
+    }
 }
